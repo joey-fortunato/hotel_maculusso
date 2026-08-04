@@ -1,66 +1,183 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Maculusso Hotel
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Website institucional e sistema de reservas do **Maculusso Hotel** — um refúgio boutique no coração de Luanda, Angola — com um **CMS personalizado** para gerir todo o conteúdo do site e um **site bilingue (Português / Inglês)**.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Índice
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- [Funcionalidades](#funcionalidades)
+- [Stack tecnológica](#stack-tecnológica)
+- [Requisitos](#requisitos)
+- [Instalação](#instalação)
+- [Acesso ao painel de gestão](#acesso-ao-painel-de-gestão)
+- [Comandos úteis](#comandos-úteis)
+- [Estrutura do projeto](#estrutura-do-projeto)
+- [Idiomas](#idiomas)
+- [Notas de produção](#notas-de-produção)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## Funcionalidades
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Site público
+- **Página inicial** com hero central e *booking bar* (calendário e seletor de hóspedes próprios, alinhados ao design system).
+- **Quartos** — listagem e página de detalhe com galeria de fotos, comodidades e tarifas (individual/duplo).
+- **Modal de reserva** — cálculo de preço por noite + total, disponibilidade por número de hóspedes; os pedidos são gravados na base de dados.
+- **Serviços**, **Restaurante** (layout zig-zag), **Galeria** (com *lightbox*), **Quem Somos**, **Contactos** (formulário gravado no CMS) e **páginas legais**.
+- **Header fixo** transparente que fica sólido ao scrollar, com **seletor de idioma** que mantém a página atual.
+- **Modo de manutenção** — os visitantes veem uma página de aviso; o administrador autenticado continua a ver o site normalmente.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### CMS (`/painel`)
+Painel de administração próprio, no design system do site (tipografia Inter):
+- **Autenticação** e *middleware* de acesso; **dashboard** com KPIs e gráfico de reservas.
+- **Reservas** e **Mensagens de contacto** com *badges* de não lidos/pendentes.
+- **Páginas** — editor com separadores por página para editar todos os textos e imagens.
+- **Quartos** — CRUD completo com *upload* de imagens e galeria por quarto.
+- **Serviços, Comodidades, Testemunhos, Restaurante, Galeria, Menu** — CRUD guiado por esquema.
+- **Definições do site** e gestão do **modo de manutenção**.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Bilingue (PT / EN)
+- Todo o conteúdo do CMS tem **campos PT e EN** (com *fallback* automático para PT quando o EN está vazio).
+- As rotas públicas existem em `/pt` e `/en`; as *strings* de interface usam ficheiros de tradução (`lang/`).
 
-## Laravel Sponsors
+---
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Stack tecnológica
 
-### Premium Partners
+| Camada | Tecnologia |
+| --- | --- |
+| Framework | Laravel 12 (PHP 8.4) |
+| Base de dados | MySQL |
+| Front-end | Blade, Tailwind CSS v4, Alpine.js |
+| Build | Vite |
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+---
 
-## Contributing
+## Requisitos
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- PHP **8.4+** (extensões habituais do Laravel: `pdo_mysql`, `mbstring`, `openssl`, `fileinfo`, …)
+- Composer 2
+- Node.js 18+ e npm
+- MySQL 8 (ou MariaDB compatível)
 
-## Code of Conduct
+---
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Instalação
 
-## Security Vulnerabilities
+```bash
+# 1. Clonar o repositório
+git clone https://github.com/joey-fortunato/hotel_maculusso.git
+cd hotel_maculusso
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+# 2. Instalar dependências
+composer install
+npm install
 
-## License
+# 3. Configurar o ambiente
+cp .env.example .env
+php artisan key:generate
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Edite o `.env` com os dados da sua base de dados:
+
+```dotenv
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=hotel_maculusso
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+```bash
+# 4. Criar as tabelas e o conteúdo inicial (inclui utilizador admin)
+php artisan migrate --seed
+
+# 5. Criar o link de storage (necessário para uploads de imagens)
+php artisan storage:link
+
+# 6. Compilar os assets
+npm run build      # produção
+# ou, em desenvolvimento:
+npm run dev
+
+# 7. Servir a aplicação
+php artisan serve
+```
+
+O site fica disponível em `http://127.0.0.1:8000` (redireciona para `/pt`).
+
+---
+
+## Acesso ao painel de gestão
+
+O `seeder` cria um administrador por defeito:
+
+| | |
+| --- | --- |
+| URL | `/painel/login` |
+| Email | `admin@hotelmaculusso.com` |
+| Palavra-passe | `password` |
+
+> ⚠️ **Altere estas credenciais antes de ir para produção.**
+
+---
+
+## Comandos úteis
+
+```bash
+php artisan migrate:fresh --seed   # recriar a base de dados com dados iniciais
+php artisan optimize:clear         # limpar caches (config, rotas, vistas)
+php artisan storage:link           # (re)criar o link público de storage
+npm run dev                        # Vite em modo desenvolvimento (hot reload)
+npm run build                      # compilar assets para produção
+```
+
+---
+
+## Estrutura do projeto
+
+```
+app/
+├─ Http/Controllers/
+│  ├─ Public/        # site público (Home, Pages, Reservation, ContactMessage)
+│  └─ Admin/         # CMS (Dashboard, Pages, Rooms, Reservations, Messages, …)
+├─ Http/Middleware/  # EnsureAdmin, EnsureSiteAvailable (manutenção)
+├─ Models/           # Room, Service, Amenity, Testimonial, Reservation, … + Setting
+│  └─ Concerns/HasTranslations.php   # método tr() para conteúdo PT/EN
+└─ Support/helpers.php               # helpers setting() e img_src()
+
+resources/views/
+├─ public/           # páginas do site
+├─ admin/            # painel de gestão
+└─ components/       # header, footer, booking-modal, layouts, …
+
+database/
+├─ migrations/       # esquema (settings, conteúdo, reservas, mensagens, traduções)
+└─ seeders/          # CmsSeeder (conteúdo inicial) + admin
+
+lang/                # traduções de interface (pt / en)
+config/hotel.php     # valores por defeito da marca (sobrepostos pelo CMS)
+```
+
+---
+
+## Idiomas
+
+| Idioma | Prefixo |
+| --- | --- |
+| Português (padrão) | `/pt/...` |
+| Inglês | `/en/...` |
+
+O conteúdo é gerido no CMS com campos PT e EN; as etiquetas de interface vivem em `lang/pt.json` e `lang/en.json`.
+
+---
+
+## Notas de produção
+
+- Definir `APP_ENV=production` e `APP_DEBUG=false` no `.env`.
+- Alterar as credenciais do administrador.
+- Executar `php artisan config:cache route:cache view:cache` após o deploy.
+- Garantir que a pasta `storage/` e o link `public/storage` são graváveis/existentes.
+- Os `uploads` de imagens ficam em `storage/app/public` (servidos via `public/storage`).
