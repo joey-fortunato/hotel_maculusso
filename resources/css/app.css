@@ -1,0 +1,144 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600;700&display=swap');
+@import 'tailwindcss';
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-caps: 'Cinzel', Georgia, serif;
+
+  /* Warm sand — page surfaces */
+  --color-sand-50: #FAF6EF;
+  --color-sand-100: #F2EADD;
+  --color-sand-200: #E6D8C4;
+  --color-sand-300: #D6C2A6;
+
+  /* Copper — the brand mark */
+  --color-copper-400: #C69A66;
+  --color-copper-500: #B07D45;
+  --color-copper-600: #98692F;
+  --color-copper-700: #7C5626;
+
+  /* Espresso — dark sections & footer */
+  --color-espresso-700: #33261A;
+  --color-espresso-800: #241A12;
+  --color-espresso-900: #1A120C;
+}
+
+@layer components {
+  .font-display { font-family: var(--font-display); }
+  .font-caps { font-family: var(--font-caps); }
+
+  .brand-logo { @apply h-10 w-auto object-contain sm:h-12; }
+  /* Turns the copper PNG white when the header floats over the dark hero */
+  .logo-invert { filter: brightness(0) invert(1); }
+
+  .eyebrow { @apply font-caps text-[11px] font-semibold uppercase tracking-[.22em]; }
+
+  .btn { @apply inline-flex min-h-12 cursor-pointer items-center justify-center px-7 text-[11px] font-semibold uppercase tracking-[.18em] transition duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-copper-400 focus-visible:ring-offset-2; }
+  .btn-gold { @apply bg-copper-500 text-sand-50 hover:bg-copper-600; }
+  .btn-light { @apply bg-sand-50 text-espresso-900 hover:bg-sand-200; }
+  .btn-outline { @apply border border-current text-current hover:bg-white hover:text-espresso-900 hover:border-white; }
+
+  .link-arrow { @apply inline-flex items-center gap-2.5 font-caps text-[11px] font-semibold uppercase tracking-[.18em] text-copper-700 transition hover:gap-4 hover:text-copper-600; }
+
+  /* Signature: the logo's archway, reused as a frame for featured imagery */
+  .arch-top { border-radius: 999px 999px 0 0; }
+
+  /* Thin arch divider echoing the roofline of the mark */
+  .rule-copper { @apply block h-px w-14 bg-copper-500; }
+
+  /* Frosted-glass panel (used over room imagery) */
+  .glass {
+    background: color-mix(in srgb, var(--color-espresso-900) 42%, transparent);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+    @apply ring-1 ring-white/15;
+  }
+
+  /* Form fields — light surfaces (reservation modal) */
+  .field-label { @apply mb-2 block font-caps text-[10px] font-semibold uppercase tracking-[.18em] text-copper-600; }
+  .field {
+    width: 100%;
+    @apply border border-sand-300 bg-white px-4 py-3 text-sm text-espresso-900 transition;
+  }
+  .field::placeholder { @apply text-espresso-900/35; }
+  .field:focus { @apply border-copper-500 outline-none ring-1 ring-copper-400/40; }
+
+  /* Form fields — dark surfaces (hero booking bar) */
+  .field-label-dark { @apply mb-2 block font-caps text-[10px] font-semibold uppercase tracking-[.18em] text-white; }
+  .field-dark {
+    width: 100%;
+    color-scheme: dark;
+    @apply border border-white/15 bg-white/5 px-4 py-3 text-sm text-white transition;
+  }
+  .field-dark::placeholder { @apply text-white/35; }
+  .field-dark:focus { @apply border-copper-400 outline-none ring-1 ring-copper-400/40; }
+
+  /* Primary-nav underline — grows on hover, stays on the active page */
+  .nav-link { @apply relative transition; }
+  .nav-link::after {
+    content: '';
+    @apply absolute inset-x-0 -bottom-1.5 h-px origin-left scale-x-0 bg-copper-400 transition-transform duration-300;
+  }
+  .nav-link:hover::after,
+  .nav-link[data-active]::after { @apply scale-x-100; }
+  .nav-link[data-active] { @apply text-copper-400; }
+}
+
+/* CMS uses Inter only — override the display/caps faces inside the admin */
+.cms .font-display,
+.cms .font-caps,
+.cms .eyebrow { font-family: var(--font-sans) !important; }
+
+/* ---- CMS premium component layer (design-system aligned) ---- */
+@layer components {
+  .cms-card { @apply border border-sand-200/80 bg-white p-5 shadow-[0_1px_2px_rgba(26,18,12,.04),0_8px_24px_-12px_rgba(26,18,12,.10)] sm:p-6 lg:p-7; }
+  .cms-card-title { @apply flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[.16em] text-espresso-900/45; }
+
+  .cms-label { @apply mb-2 block text-[11px] font-semibold uppercase tracking-[.12em] text-espresso-900/55; }
+  .cms-input {
+    @apply block w-full border border-sand-300 bg-sand-50/60 px-3.5 py-2.5 text-sm text-espresso-900 transition;
+  }
+  .cms-input::placeholder { @apply text-espresso-900/30; }
+  .cms-input:focus { @apply border-copper-500 bg-white outline-none ring-2 ring-copper-400/25; }
+
+  .cms-file { @apply block w-full text-xs text-espresso-900/50 file:mr-3 file:cursor-pointer file:border-0 file:bg-espresso-800 file:px-3 file:py-2 file:text-[11px] file:font-semibold file:uppercase file:tracking-wide file:text-white hover:file:bg-espresso-900; }
+
+  /* Sidebar nav */
+  .cms-nav-link { @apply relative flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-sand-200/65 transition hover:bg-white/[0.04] hover:text-white; }
+  .cms-nav-link[data-active] { @apply bg-white/[0.06] text-white; }
+  .cms-nav-link[data-active]::before { content: ''; @apply absolute left-0 top-1/2 h-6 w-[3px] -translate-y-1/2 bg-copper-400; }
+  .cms-nav-group { @apply px-4 pb-2 pt-5 text-[10px] font-semibold uppercase tracking-[.18em] text-sand-200/35; }
+
+  /* Status pills */
+  .cms-pill { @apply inline-flex items-center gap-1.5 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[.08em]; }
+  .cms-pill-pending { @apply bg-amber-500/15 text-amber-700; }
+  .cms-pill-confirmed { @apply bg-emerald-500/15 text-emerald-700; }
+  .cms-pill-cancelled { @apply bg-rose-500/12 text-rose-600; }
+}
+
+/* Custom scrollbar — copper on sand, matching the brand */
+* { scrollbar-width: thin; scrollbar-color: var(--color-copper-500) var(--color-sand-100); }
+::-webkit-scrollbar { width: 11px; height: 11px; }
+::-webkit-scrollbar-track { background: var(--color-sand-100); }
+::-webkit-scrollbar-thumb {
+  background: var(--color-copper-500);
+  border: 3px solid var(--color-sand-100);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--color-copper-600); }
+
+/* Dark scroll surfaces (e.g. the reservation modal) */
+.scroll-dark { scrollbar-color: var(--color-copper-500) var(--color-espresso-900); }
+.scroll-dark::-webkit-scrollbar-track { background: var(--color-espresso-900); }
+.scroll-dark::-webkit-scrollbar-thumb { background: var(--color-copper-500); border-color: var(--color-espresso-900); }
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { transition-duration: .01ms !important; }
+}
