@@ -61,11 +61,19 @@ final class PagesController extends Controller
                 'services_hero_body' => ['Texto', 'textarea'],
                 'services_hero_image' => ['Imagem', 'image'],
             ]]],
-            'restaurante' => ['label' => 'Restaurante', 'blocks' => ['Cabeçalho' => [
-                'restaurant_hero_title' => ['Título', 'text'],
-                'restaurant_hero_body' => ['Texto', 'textarea'],
-                'restaurant_hero_image' => ['Imagem', 'image'],
-            ]]],
+            'restaurante' => ['label' => 'Restaurante', 'blocks' => [
+                'Cabeçalho' => [
+                    'restaurant_hero_title' => ['Título', 'text'],
+                    'restaurant_hero_body' => ['Texto', 'textarea'],
+                    'restaurant_hero_image' => ['Imagem', 'image'],
+                ],
+                'Introdução (Gastronomia)' => [
+                    'restaurant_intro_eyebrow' => ['Sobre-título', 'text'],
+                    'restaurant_intro_title' => ['Título', 'text'],
+                    'restaurant_intro_body' => ['Texto', 'textarea'],
+                    'restaurant_intro_image' => ['Imagem (arco)', 'image'],
+                ],
+            ]],
             'galeria' => ['label' => 'Galeria', 'blocks' => ['Cabeçalho' => [
                 'gallery_hero_title' => ['Título', 'text'],
                 'gallery_hero_body' => ['Texto', 'textarea'],
@@ -100,6 +108,13 @@ final class PagesController extends Controller
                     'instagram' => ['Instagram', 'text'],
                     'facebook' => ['Facebook', 'text'],
                     'footer_tagline' => ['Texto do rodapé', 'textarea'],
+                    'footer_reservas' => ['Rodapé — texto de Reservas', 'textarea'],
+                ],
+                'Bloco de reserva (fim de todas as páginas)' => [
+                    'cta_eyebrow' => ['Sobre-título', 'text'],
+                    'cta_title' => ['Título', 'text'],
+                    'cta_body' => ['Texto', 'textarea'],
+                    'cta_image' => ['Imagem de fundo', 'image'],
                 ],
             ]],
         ];

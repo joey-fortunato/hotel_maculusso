@@ -95,12 +95,37 @@ class CmsSeeder extends Seeder
                 'blog_hero_body' => 'Histórias, sabores e roteiros para aproveitar melhor cada estadia e descobrir Luanda ao seu ritmo.',
                 'blog_hero_image' => 'https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=2400&q=90',
             ],
+            'blocks' => [
+                'cta_eyebrow' => 'A sua próxima estadia',
+                'cta_title' => 'Reserve o tempo para aquilo que realmente importa.',
+                'cta_body' => 'A sua próxima estadia começa aqui. Reserve directamente e deixe o resto connosco.',
+                'cta_image' => 'https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=2200&q=80',
+                'footer_reservas' => 'Reserve directamente e deixe o resto connosco.',
+                'restaurant_intro_eyebrow' => 'Gastronomia',
+                'restaurant_intro_title' => 'Uma experiência culinária única.',
+                'restaurant_intro_body' => 'O nosso restaurante oferece uma variedade de pratos deliciosos, preparados com ingredientes frescos e de alta qualidade. Da cozinha angolana aos clássicos internacionais, cada refeição é pensada para ser recordada.',
+                'restaurant_intro_image' => 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1000&q=85',
+            ],
         ];
 
         foreach ($settings as $group => $pairs) {
             foreach ($pairs as $key => $value) {
                 Setting::updateOrCreate(['key' => $key], ['value' => $value, 'group' => $group]);
             }
+        }
+
+        // English translations for the newly mapped blocks
+        $en = [
+            'cta_eyebrow' => 'Your next stay',
+            'cta_title' => 'Reserve time for what truly matters.',
+            'cta_body' => 'Your next stay starts here. Book directly and leave the rest to us.',
+            'footer_reservas' => 'Book directly and leave the rest to us.',
+            'restaurant_intro_eyebrow' => 'Gastronomy',
+            'restaurant_intro_title' => 'A unique culinary experience.',
+            'restaurant_intro_body' => 'Our restaurant offers a variety of delicious dishes, prepared with fresh, high-quality ingredients. From Angolan cuisine to international classics, every meal is made to be remembered.',
+        ];
+        foreach ($en as $key => $value) {
+            Setting::putEn($key, $value);
         }
     }
 

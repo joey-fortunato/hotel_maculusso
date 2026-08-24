@@ -10,15 +10,15 @@
         <section class="mx-auto grid max-w-7xl gap-12 px-6 py-24 lg:grid-cols-2 lg:items-center lg:gap-20 lg:px-10 lg:py-32">
             <div class="mx-auto w-full max-w-sm">
                 <div class="arch-top overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1000&q=85" alt="Prato do restaurante" loading="lazy" class="aspect-[3/4] h-full w-full object-cover">
+                    <img src="{{ img_src(setting('restaurant_intro_image', 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1000&q=85')) }}" alt="{{ setting('restaurant_intro_title') }}" loading="lazy" class="aspect-[3/4] h-full w-full object-cover">
                 </div>
             </div>
             <div>
-                <p class="eyebrow text-copper-600">Gastronomia</p>
+                <p class="eyebrow text-copper-600">{{ setting('restaurant_intro_eyebrow', 'Gastronomia') }}</p>
                 <span class="rule-copper mt-5"></span>
-                <h2 class="mt-6 font-display text-4xl leading-tight sm:text-5xl">Uma experiência culinária única.</h2>
-                <p class="mt-6 leading-8 text-espresso-900/70">O nosso restaurante oferece uma variedade de pratos deliciosos, preparados com ingredientes frescos e de alta qualidade. Da cozinha angolana aos clássicos internacionais, cada refeição é pensada para ser recordada.</p>
-                <a href="{{ route('booking') }}" class="btn btn-gold mt-8">Reservar mesa</a>
+                <h2 class="mt-6 font-display text-4xl leading-tight sm:text-5xl">{{ setting('restaurant_intro_title', 'Uma experiência culinária única.') }}</h2>
+                <p class="mt-6 leading-8 text-espresso-900/70">{{ setting('restaurant_intro_body', 'O nosso restaurante oferece uma variedade de pratos deliciosos, preparados com ingredientes frescos e de alta qualidade. Da cozinha angolana aos clássicos internacionais, cada refeição é pensada para ser recordada.') }}</p>
+                <a href="{{ route('booking') }}" class="btn btn-gold mt-8">{{ __('Reservar mesa') }}</a>
             </div>
         </section>
 
