@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AmenityController;
+use App\Http\Controllers\Admin\AuditController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\GalleryImageController;
@@ -57,6 +58,12 @@ Route::prefix('painel')->name('admin.')->group(function (): void {
         Route::get('mensagens', [MessageController::class, 'index'])->name('messages.index');
         Route::get('mensagens/{message}', [MessageController::class, 'show'])->name('messages.show');
         Route::delete('mensagens/{message}', [MessageController::class, 'destroy'])->name('messages.destroy');
+
+        // Auditoria — reservado ao super administrador
+        Route::middleware('super-admin')->group(function (): void {
+            Route::get('auditoria', [AuditController::class, 'index'])->name('audit.index');
+            Route::get('auditoria/exportar', [AuditController::class, 'export'])->name('audit.export');
+        });
 
         // Pages (tabbed content editor)
         Route::get('paginas', [PagesController::class, 'edit'])->name('pages.edit');

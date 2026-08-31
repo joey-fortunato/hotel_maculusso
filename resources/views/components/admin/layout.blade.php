@@ -20,6 +20,13 @@
             ['label' => 'Galeria', 'route' => 'admin.gallery.index', 'pattern' => 'admin.gallery.*', 'icon' => 'M4 5h16v14H4zM4 15l4-4 4 4 3-3 5 5'],
         ],
     ];
+
+    // Super-admin-only section.
+    if (auth()->user()->is_super_admin) {
+        $groups['Administração'] = [
+            ['label' => 'Auditoria', 'route' => 'admin.audit.index', 'pattern' => 'admin.audit.*', 'icon' => 'M9 12l2 2 4-4M7.8 4.6a2 2 0 0 1 1.4-.6h5.6a2 2 0 0 1 1.4.6l2.2 2.2a2 2 0 0 1 .6 1.4v9.8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8.2a2 2 0 0 1 .6-1.4z'],
+        ];
+    }
 @endphp
 <!doctype html>
 <html lang="pt" class="scroll-smooth">
@@ -81,7 +88,7 @@
                 <div class="flex items-center gap-4">
                     <span class="hidden text-right sm:block">
                         <span class="block text-xs font-medium leading-tight">{{ auth()->user()->name }}</span>
-                        <span class="block text-[11px] text-espresso-900/45">Administrador</span>
+                        <span class="block text-[11px] text-espresso-900/45">{{ auth()->user()->is_super_admin ? 'Super Administrador' : 'Administrador' }}</span>
                     </span>
                     <form method="post" action="{{ route('admin.logout') }}">
                         @csrf
