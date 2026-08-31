@@ -44,6 +44,7 @@
                     @endif
                     <form class="grid gap-5" action="{{ route('contact.store') }}" method="post">
                         @csrf
+                        <x-public.form-guard />
                         <label class="text-xs font-semibold uppercase tracking-[.14em] text-espresso-900/60">{{ __('Nome') }}
                             <input class="mt-2 w-full border border-sand-200 bg-sand-50 px-4 py-3 text-base text-espresso-900 focus:border-copper-500 focus:outline-none @error('name') border-red-400 @enderror" type="text" name="name" value="{{ old('name') }}" required>
                             @error('name')<span class="mt-1 block text-xs text-red-600">{{ $message }}</span>@enderror

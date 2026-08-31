@@ -19,6 +19,7 @@
         window.APP_LOCALE = "{{ app()->getLocale() }}";
         window.RESERVATION_URL = "{{ route('reservation.store') }}";
         window.CSRF_TOKEN = document.querySelector('meta[name=csrf-token]').content;
+        window.FORM_TS = "{{ \Illuminate\Support\Facades\Crypt::encryptString((string) time()) }}";
     </script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>

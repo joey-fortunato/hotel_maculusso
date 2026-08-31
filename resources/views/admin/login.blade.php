@@ -23,6 +23,7 @@
 
         <form method="post" action="{{ route('admin.login.submit') }}" class="mt-6 grid gap-4">
             @csrf
+            <x-public.form-guard />
             <div>
                 <label class="mb-2 block font-caps text-[10px] font-semibold uppercase tracking-[.18em] text-copper-600">Email</label>
                 <input type="email" name="email" value="{{ old('email') }}" required autofocus

@@ -123,6 +123,8 @@ Alpine.store('booking', {
                     name: this.name,
                     email: this.email,
                     phone: this.phone,
+                    website: '', // honeypot — stays empty for real users
+                    _ts: window.FORM_TS,
                 }),
             });
 
@@ -134,7 +136,12 @@ Alpine.store('booking', {
                 const data = await res.json();
                 this.errors = data.errors || {};
                 this.status = 'error';
-                this.message = 'Verifique os campos assinalados e tente novamente.';
+                this.message = Object.keys(this.errors).length
+                    ? 'Verifique os campos assinalados e tente novamente.'
+                    : (data.message || 'Não foi possível processar o pedido. Tente novamente.');
+            } else if (res.status === 429) {
+                this.status = 'error';
+                this.message = 'Demasiados pedidos. Aguarde um momento e tente novamente.';
             } else {
                 this.status = 'error';
                 this.message = 'Ocorreu um erro ao processar o pedido. Tente novamente.';

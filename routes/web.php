@@ -21,8 +21,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::redirect('/', '/pt');
 
-Route::post('/reservation', ReservationController::class)->name('reservation.store');
-Route::post('/mensagem', [ContactMessageController::class, 'store'])->name('contact.store');
+Route::post('/reservation', ReservationController::class)
+    ->middleware(['throttle:8,1', 'bot-guard'])
+    ->name('reservation.store');
+Route::post('/mensagem', [ContactMessageController::class, 'store'])
+    ->middleware(['throttle:6,1', 'bot-guard'])
+    ->name('contact.store');
 
 /*
 |--------------------------------------------------------------------------
@@ -31,7 +35,9 @@ Route::post('/mensagem', [ContactMessageController::class, 'store'])->name('cont
 */
 Route::prefix('painel')->name('admin.')->group(function (): void {
     Route::get('login', [AuthController::class, 'show'])->name('login');
-    Route::post('login', [AuthController::class, 'login'])->name('login.submit');
+    Route::post('login', [AuthController::class, 'login'])
+        ->middleware(['throttle:6,1', 'bot-guard:0'])
+        ->name('login.submit');
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
     Route::middleware('admin')->group(function (): void {

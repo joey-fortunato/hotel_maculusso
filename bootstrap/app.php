@@ -14,6 +14,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'admin' => \App\Http\Middleware\EnsureAdmin::class,
             'available' => \App\Http\Middleware\EnsureSiteAvailable::class,
+            'bot-guard' => \App\Http\Middleware\BotGuard::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
