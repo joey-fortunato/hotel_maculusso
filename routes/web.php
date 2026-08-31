@@ -20,7 +20,9 @@ use App\Http\Controllers\Public\PageController;
 use App\Http\Controllers\Public\ReservationController;
 use Illuminate\Support\Facades\Route;
 
-Route::redirect('/', '/pt');
+// Old prefixed Portuguese URLs → new prefix-less ones (SEO / bookmarks).
+Route::redirect('/pt', '/');
+Route::get('/pt/{rest}', fn (string $rest) => redirect('/'.$rest))->where('rest', '.*');
 
 Route::post('/reservation', ReservationController::class)
     ->middleware(['throttle:8,1', 'bot-guard'])
@@ -80,21 +82,23 @@ Route::prefix('painel')->name('admin.')->group(function (): void {
     });
 });
 
-Route::prefix('{locale}')
-    ->whereIn('locale', ['pt', 'en'])
-    ->middleware('available')
-    ->group(function (): void {
-        Route::get('/', HomeController::class)->name('home');
-        Route::get('/rooms', [PageController::class, 'rooms'])->name('rooms.index');
-        Route::get('/rooms/{slug}', [PageController::class, 'room'])->name('rooms.show');
-        Route::get('/services', [PageController::class, 'services'])->name('services.index');
-        Route::get('/restaurant', [PageController::class, 'restaurant'])->name('restaurant');
-        Route::get('/gallery', [PageController::class, 'gallery'])->name('gallery');
-        Route::get('/about', [PageController::class, 'about'])->name('about');
-        Route::get('/contact', [PageController::class, 'contact'])->name('contact');
-        Route::get('/privacy', [PageController::class, 'privacy'])->name('privacy');
-        Route::get('/terms', [PageController::class, 'terms'])->name('terms');
-    });
+// Localized public pages. Portuguese (default) has no prefix; English lives under /en.
+// The same routes are registered twice: EN names get an "en." prefix (see lroute()).
+$localizedRoutes = function (): void {
+    Route::get('/', HomeController::class)->name('home');
+    Route::get('/rooms', [PageController::class, 'rooms'])->name('rooms.index');
+    Route::get('/rooms/{slug}', [PageController::class, 'room'])->name('rooms.show');
+    Route::get('/services', [PageController::class, 'services'])->name('services.index');
+    Route::get('/restaurant', [PageController::class, 'restaurant'])->name('restaurant');
+    Route::get('/gallery', [PageController::class, 'gallery'])->name('gallery');
+    Route::get('/about', [PageController::class, 'about'])->name('about');
+    Route::get('/contact', [PageController::class, 'contact'])->name('contact');
+    Route::get('/privacy', [PageController::class, 'privacy'])->name('privacy');
+    Route::get('/terms', [PageController::class, 'terms'])->name('terms');
+};
+
+Route::prefix('en')->name('en.')->middleware(['setlocale', 'available'])->group($localizedRoutes);
+Route::middleware(['setlocale', 'available'])->group($localizedRoutes);
 
 Route::get('/booking', function () {
     return redirect()->away(setting('booking_url', config('hotel.booking_url')));

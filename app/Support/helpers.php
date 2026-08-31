@@ -12,6 +12,21 @@ if (! function_exists('setting')) {
     }
 }
 
+if (! function_exists('lroute')) {
+    /**
+     * Locale-aware route URL. Portuguese (default) has no prefix; English → /en.
+     * Pass named route params in $params (never the locale). Defaults to the
+     * current app locale, or override it (e.g. the language switcher).
+     */
+    function lroute(string $name, array $params = [], ?string $locale = null): string
+    {
+        $locale = $locale ?? app()->getLocale();
+
+        // English routes are registered with an "en." name prefix; PT keeps base names.
+        return route($locale === 'en' ? 'en.'.$name : $name, $params);
+    }
+}
+
 if (! function_exists('img_src')) {
     /**
      * Resolve a CMS image value that may be an external URL or a stored path.

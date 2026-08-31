@@ -14,6 +14,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'admin' => \App\Http\Middleware\EnsureAdmin::class,
             'available' => \App\Http\Middleware\EnsureSiteAvailable::class,
+            'setlocale' => \App\Http\Middleware\SetLocale::class,
             'bot-guard' => \App\Http\Middleware\BotGuard::class,
             'super-admin' => \App\Http\Middleware\EnsureSuperAdmin::class,
         ]);

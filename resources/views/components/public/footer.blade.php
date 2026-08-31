@@ -8,11 +8,11 @@
         <div>
             <p class="eyebrow text-copper-400">{{ __('Explorar') }}</p>
             <div class="mt-5 grid gap-3 text-sm">
-                <a class="transition hover:text-copper-400" href="{{ route('rooms.index', $locale) }}">{{ __('Quartos & Suites') }}</a>
-                <a class="transition hover:text-copper-400" href="{{ route('services.index', $locale) }}">{{ __('Serviços') }}</a>
-                <a class="transition hover:text-copper-400" href="{{ route('restaurant', $locale) }}">{{ __('Restaurante') }}</a>
-                <a class="transition hover:text-copper-400" href="{{ route('gallery', $locale) }}">{{ __('Galeria') }}</a>
-                <a class="transition hover:text-copper-400" href="{{ route('about', $locale) }}">{{ __('Quem Somos') }}</a>
+                <a class="transition hover:text-copper-400" href="{{ lroute('rooms.index') }}">{{ __('Quartos & Suites') }}</a>
+                <a class="transition hover:text-copper-400" href="{{ lroute('services.index') }}">{{ __('Serviços') }}</a>
+                <a class="transition hover:text-copper-400" href="{{ lroute('restaurant') }}">{{ __('Restaurante') }}</a>
+                <a class="transition hover:text-copper-400" href="{{ lroute('gallery') }}">{{ __('Galeria') }}</a>
+                <a class="transition hover:text-copper-400" href="{{ lroute('about') }}">{{ __('Quem Somos') }}</a>
             </div>
         </div>
         <div>

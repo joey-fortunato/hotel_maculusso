@@ -1,6 +1,6 @@
 @props(['room', 'locale'])
 @php $en = app()->getLocale() === 'en'; @endphp
-<a href="{{ route('rooms.show', [$locale, $room['slug']]) }}"
+<a href="{{ lroute('rooms.show', ['slug' => $room['slug']]) }}"
    class="group relative isolate flex aspect-square flex-col justify-end overflow-hidden bg-espresso-900 text-white shadow-sm transition duration-500 hover:shadow-xl">
     {{-- Image fills the card, stays visible; gradient only for legibility --}}
     <img src="{{ img_src($room->image) }}" alt="{{ $room->tr('name') }}" loading="lazy"

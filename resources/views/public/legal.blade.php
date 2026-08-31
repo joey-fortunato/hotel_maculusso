@@ -17,7 +17,7 @@
                     </div>
                 @endforeach
             </div>
-            <p class="mt-16 border-t border-sand-200 pt-8 text-sm text-espresso-900/50">Para qualquer questão, contacte-nos através de <a href="mailto:{{ setting('email') }}" class="text-copper-600 underline underline-offset-4">{{ setting('email') }}</a>.</p>
+            <p class="mt-16 border-t border-sand-200 pt-8 text-sm text-espresso-900/50">{{ __('Para qualquer questão, contacte-nos através de') }} <a href="mailto:{{ setting('email') }}" class="text-copper-600 underline underline-offset-4">{{ setting('email') }}</a>.</p>
         </section>
     </main>
     <x-public.footer :locale="$locale" />

@@ -220,16 +220,16 @@ class CmsSeeder extends Seeder
     private function nav(): void
     {
         $items = [
-            ['Início', 'home', 'home'],
-            ['Quartos', 'rooms.index', 'rooms.*'],
-            ['Serviços', 'services.index', 'services.*'],
-            ['Restaurante', 'restaurant', 'restaurant'],
-            ['Galeria', 'gallery', 'gallery'],
-            ['Quem Somos', 'about', 'about'],
-            ['Contactos', 'contact', 'contact'],
+            ['Início', 'Home', 'home', 'home'],
+            ['Quartos', 'Rooms', 'rooms.index', 'rooms.*'],
+            ['Serviços', 'Services', 'services.index', 'services.*'],
+            ['Restaurante', 'Restaurant', 'restaurant', 'restaurant'],
+            ['Galeria', 'Gallery', 'gallery', 'gallery'],
+            ['Quem Somos', 'About', 'about', 'about'],
+            ['Contactos', 'Contact', 'contact', 'contact'],
         ];
-        foreach ($items as $i => [$label, $route, $pattern]) {
-            NavItem::updateOrCreate(['label' => $label], ['route' => $route, 'pattern' => $pattern, 'sort' => $i]);
+        foreach ($items as $i => [$label, $labelEn, $route, $pattern]) {
+            NavItem::updateOrCreate(['label' => $label], ['label_en' => $labelEn, 'route' => $route, 'pattern' => $pattern, 'sort' => $i]);
         }
     }
 

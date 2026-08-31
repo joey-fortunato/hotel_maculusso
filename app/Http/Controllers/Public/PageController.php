@@ -7,40 +7,33 @@ use Illuminate\Contracts\View\View;
 
 final class PageController extends Controller
 {
-    public function rooms(string $locale): View
+    // Locale is set by the SetLocale middleware and shared with every view.
+
+    public function rooms(): View
     {
-        app()->setLocale($locale);
-        return view('public.rooms', ['locale' => $locale, 'rooms' => \App\Models\Room::published()->ordered()->get()]);
+        return view('public.rooms', ['rooms' => \App\Models\Room::published()->ordered()->get()]);
     }
 
-    public function services(string $locale): View { return $this->render('services', $locale); }
-    public function restaurant(string $locale): View { return $this->render('restaurant', $locale); }
-    public function gallery(string $locale): View { return $this->render('gallery', $locale); }
-    public function about(string $locale): View { return $this->render('about', $locale); }
-    public function contact(string $locale): View { return $this->render('contact', $locale); }
+    public function services(): View { return view('public.services'); }
+    public function restaurant(): View { return view('public.restaurant'); }
+    public function gallery(): View { return view('public.gallery'); }
+    public function about(): View { return view('public.about'); }
+    public function contact(): View { return view('public.contact'); }
 
-    public function privacy(string $locale): View { return $this->legal('privacy', $locale); }
-    public function terms(string $locale): View { return $this->legal('terms', $locale); }
+    public function privacy(): View { return $this->legal('privacy'); }
+    public function terms(): View { return $this->legal('terms'); }
 
-    public function room(string $locale, string $slug): View
+    public function room(string $slug): View
     {
-        app()->setLocale($locale);
         $room = \App\Models\Room::published()->where('slug', $slug)->firstOrFail();
 
-        return view('public.room', ['locale' => $locale, 'room' => $room]);
+        return view('public.room', ['room' => $room]);
     }
 
-    private function render(string $view, string $locale): View
+    private function legal(string $page): View
     {
-        app()->setLocale($locale);
-        return view("public.{$view}", ['locale' => $locale]);
-    }
-
-    private function legal(string $page, string $locale): View
-    {
-        app()->setLocale($locale);
         $model = \App\Models\Page::where('key', $page)->firstOrFail();
 
-        return view('public.legal', ['locale' => $locale, 'page' => $model]);
+        return view('public.legal', ['page' => $model]);
     }
 }

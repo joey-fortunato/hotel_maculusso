@@ -2,14 +2,16 @@
 @php
     $nav = \App\Models\NavItem::published()->ordered()->get()->map(fn ($item) => [
         'label' => $item->tr('label'),
-        'url' => \Illuminate\Support\Facades\Route::has($item->route) ? route($item->route, $locale) : '#',
+        'url' => \Illuminate\Support\Facades\Route::has($item->route) ? lroute($item->route) : '#',
         'pattern' => $item->pattern ?: $item->route,
     ]);
 
-    // Same page, other language
-    $routeName = \Illuminate\Support\Facades\Route::currentRouteName() ?: 'home';
+    // Same page, other language: normalise to the base route name, then rebuild per locale.
+    $routeName = preg_replace('/^en\./', '', \Illuminate\Support\Facades\Route::currentRouteName() ?: 'home');
     $routeParams = request()->route()?->parameters() ?? [];
-    $langUrl = fn (string $loc) => route($routeName, array_merge($routeParams, ['locale' => $loc]));
+    $langUrl = fn (string $loc) => \Illuminate\Support\Facades\Route::has($loc === 'en' ? 'en.'.$routeName : $routeName)
+        ? lroute($routeName, $routeParams, $loc)
+        : lroute('home', [], $loc);
     $languages = ['pt' => 'Português', 'en' => 'English'];
 @endphp
 <header
@@ -20,7 +22,7 @@
     :class="scrolled || open ? 'bg-sand-50/95 text-espresso-900 shadow-sm backdrop-blur border-espresso-900/5' : 'bg-transparent text-white border-transparent'"
     class="fixed inset-x-0 top-0 z-50 border-b transition-colors duration-500">
     <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-3.5 lg:px-10">
-        <a href="{{ route('home', $locale) }}" class="block" aria-label="Maculusso Hotel — página inicial">
+        <a href="{{ lroute('home') }}" class="block" aria-label="Maculusso Hotel — página inicial">
             <img src="{{ asset('images/brand/maculusso-logo.png') }}" alt="Maculusso Hotel"
                  class="brand-logo transition duration-500" :class="scrolled || open ? '' : 'logo-invert'">
         </a>

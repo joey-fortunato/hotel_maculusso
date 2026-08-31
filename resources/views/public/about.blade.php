@@ -9,7 +9,7 @@
 
         <section class="mx-auto grid max-w-7xl gap-12 px-6 py-24 lg:grid-cols-2 lg:items-center lg:gap-20 lg:px-10 lg:py-32">
             <div>
-                <p class="eyebrow text-copper-600">A nossa história</p>
+                <p class="eyebrow text-copper-600">{{ __('A nossa história') }}</p>
                 <span class="rule-copper mt-5"></span>
                 <h2 class="mt-6 font-display text-4xl leading-tight sm:text-5xl">{{ setting('about_intro_title') }}</h2>
                 @foreach(preg_split('/\n\n+/', (string) setting('about_intro_body')) as $para)
@@ -18,7 +18,7 @@
             </div>
             <div class="mx-auto w-full max-w-sm">
                 <div class="arch-top overflow-hidden">
-                    <img src="{{ img_src(setting('about_image')) }}" alt="Receção do Maculusso Hotel" loading="lazy" class="aspect-[3/4] h-full w-full object-cover">
+                    <img src="{{ img_src(setting('about_image')) }}" alt="{{ setting('name') }}" loading="lazy" class="aspect-[3/4] h-full w-full object-cover">
                 </div>
             </div>
         </section>
@@ -26,15 +26,15 @@
         <section class="bg-sand-100 py-24 lg:py-32">
             <div class="mx-auto max-w-7xl px-6 lg:px-10">
                 <div class="max-w-2xl">
-                    <p class="eyebrow text-copper-600">O que nos define</p>
+                    <p class="eyebrow text-copper-600">{{ __('O que nos define') }}</p>
                     <span class="rule-copper mt-5"></span>
-                    <h2 class="mt-6 font-display text-4xl leading-tight sm:text-5xl">Oferecemos hospitalidade excepcional num ambiente tranquilo e sofisticado.</h2>
+                    <h2 class="mt-6 font-display text-4xl leading-tight sm:text-5xl">{{ __('Oferecemos hospitalidade excepcional num ambiente tranquilo e sofisticado.') }}</h2>
                 </div>
                 <div class="mt-14 grid gap-10 sm:grid-cols-3">
                     @foreach([
-                        ['Calor humano', 'Atenção presente, nunca invasiva. Uma equipa que antecipa o que precisa.'],
-                        ['Conforto genuíno', 'Qualidade que se nota nos pequenos gestos e nas comodidades modernas.'],
-                        ['Ligação a Luanda', 'Uma estadia com verdadeiro sentido de lugar, no coração da cidade.'],
+                        [__('Calor humano'), __('Atenção presente, nunca invasiva. Uma equipa que antecipa o que precisa.')],
+                        [__('Conforto genuíno'), __('Qualidade que se nota nos pequenos gestos e nas comodidades modernas.')],
+                        [__('Ligação a Luanda'), __('Uma estadia com verdadeiro sentido de lugar, no coração da cidade.')],
                     ] as [$t, $b])
                         <div>
                             <span class="font-caps text-copper-500">·</span>

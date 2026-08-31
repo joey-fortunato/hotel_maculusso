@@ -12,7 +12,7 @@
             :image="img_src($room->image)" />
 
         <section class="mx-auto max-w-6xl px-6 py-20 lg:px-10 lg:py-28">
-            <a href="{{ route('rooms.index', $locale) }}" class="link-arrow"><span aria-hidden="true">&larr;</span> {{ __('Todos os quartos') }}</a>
+            <a href="{{ lroute('rooms.index') }}" class="link-arrow"><span aria-hidden="true">&larr;</span> {{ __('Todos os quartos') }}</a>
 
             <div class="mt-12 grid gap-14 lg:grid-cols-[1.4fr_1fr] lg:gap-20">
                 <div>

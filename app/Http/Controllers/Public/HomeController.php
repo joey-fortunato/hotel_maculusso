@@ -9,12 +9,9 @@ use Illuminate\Http\Request;
 
 final class HomeController extends Controller
 {
-    public function __invoke(Request $request, string $locale): View
+    public function __invoke(Request $request): View
     {
-        app()->setLocale($locale);
-
         return view('public.home', [
-            'locale' => $locale,
             'rooms' => Room::published()->ordered()->get(),
         ]);
     }

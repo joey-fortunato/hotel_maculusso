@@ -63,7 +63,7 @@
                 @endforeach
             </nav>
             <div class="shrink-0 border-t border-white/10 p-3">
-                <a href="{{ route('home', 'pt') }}" target="_blank" class="flex items-center gap-3 px-4 py-2.5 text-xs font-medium uppercase tracking-[.14em] text-sand-200/50 transition hover:text-copper-400">
+                <a href="{{ route('home') }}" target="_blank" class="flex items-center gap-3 px-4 py-2.5 text-xs font-medium uppercase tracking-[.14em] text-sand-200/50 transition hover:text-copper-400">
                     <svg class="h-[18px] w-[18px]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5h5v5M19 5l-8 8M11 5H6a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-5"/></svg>
                     Ver o site
                 </a>

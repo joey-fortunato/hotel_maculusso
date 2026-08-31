@@ -1,4 +1,5 @@
 @php($locale = request()->segment(1) === 'en' ? 'en' : 'pt')
+@php(app()->setLocale($locale))
 <x-layouts.public title="Página não encontrada | Maculusso Hotel">
     <x-public.header :locale="$locale" />
     <main class="relative isolate flex min-h-[80vh] items-center overflow-hidden bg-espresso-900 px-6 text-center text-white">
@@ -9,7 +10,7 @@
             <span class="rule-copper mx-auto mt-5"></span>
             <h1 class="mt-6 font-display text-5xl leading-tight sm:text-6xl">Esta página não faz parte da estadia.</h1>
             <p class="mt-5 text-lg leading-8 text-sand-200/80">O endereço pode ter mudado. Volte à página inicial e deixe-nos guiá-lo.</p>
-            <a href="{{ route('home', $locale) }}" class="btn btn-gold mt-8">Voltar ao início</a>
+            <a href="{{ lroute('home') }}" class="btn btn-gold mt-8">Voltar ao início</a>
         </div>
     </main>
     <x-public.footer :locale="$locale" />

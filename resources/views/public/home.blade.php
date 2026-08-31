@@ -83,7 +83,7 @@
         {{-- Amenities strip --}}
         <section class="border-b border-sand-200 bg-white">
             <div class="mx-auto grid max-w-7xl grid-cols-2 divide-x divide-sand-200 px-6 lg:grid-cols-4 lg:px-10">
-                @foreach([['+30','Quartos & suites'],['24h','Receção sempre presente'],['Piscina','& ginásio'],['Bar','Cocktail lounge']] as [$big, $small])
+                @foreach([['+30', __('Quartos & suites')], ['24h', __('Receção sempre presente')], [__('Piscina'), __('& ginásio')], [__('Bar'), __('Cocktail lounge')]] as [$big, $small])
                     <div class="py-8 text-center">
                         <p class="font-display text-3xl text-copper-600">{{ $big }}</p>
                         <p class="mt-1 text-xs uppercase tracking-[.16em] text-espresso-900/50">{{ $small }}</p>
@@ -104,7 +104,7 @@
                 <span class="rule-copper mt-5"></span>
                 <h2 class="mt-6 font-display text-4xl leading-tight sm:text-5xl">{{ setting('welcome_title') }}</h2>
                 <p class="mt-6 leading-8 text-espresso-900/70">{{ setting('welcome_body') }}</p>
-                <a href="{{ route('about', $locale) }}" class="link-arrow mt-8">{{ __('A nossa história') }} <span aria-hidden="true">&rarr;</span></a>
+                <a href="{{ lroute('about') }}" class="link-arrow mt-8">{{ __('A nossa história') }} <span aria-hidden="true">&rarr;</span></a>
             </div>
         </section>
 
@@ -117,7 +117,7 @@
                         <span class="rule-copper mt-5"></span>
                         <h2 class="mt-6 max-w-xl font-display text-4xl leading-tight sm:text-5xl">{{ setting('rooms_home_title') }}</h2>
                     </div>
-                    <a href="{{ route('rooms.index', $locale) }}" class="link-arrow hidden sm:inline-flex">{{ __('Ver todos') }} <span aria-hidden="true">&rarr;</span></a>
+                    <a href="{{ lroute('rooms.index') }}" class="link-arrow hidden sm:inline-flex">{{ __('Ver todos') }} <span aria-hidden="true">&rarr;</span></a>
                 </div>
                 <div class="mt-12 grid gap-7 sm:grid-cols-2">
                     @foreach($rooms as $room)
@@ -135,7 +135,7 @@
                     <span class="rule-copper mt-5"></span>
                     <h2 class="mt-6 font-display text-4xl leading-tight sm:text-5xl">{{ setting('dining_title') }}</h2>
                     <p class="mt-6 max-w-lg leading-8 text-sand-200/80">{{ setting('dining_body') }}</p>
-                    <a href="{{ route('restaurant', $locale) }}" class="btn btn-gold mt-8">{{ __('Explorar o restaurante') }}</a>
+                    <a href="{{ lroute('restaurant') }}" class="btn btn-gold mt-8">{{ __('Explorar o restaurante') }}</a>
                 </div>
                 <img src="{{ img_src(setting('dining_image')) }}" alt="Ambiente do restaurante" loading="lazy" class="aspect-[4/3] h-full w-full object-cover">
             </div>
