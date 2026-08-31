@@ -8,6 +8,7 @@ use Illuminate\Auth\Events\Failed;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Auth\Events\Logout;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -41,6 +42,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // Keep index-friendly string length for older MySQL/MariaDB (utf8mb4).
+        Schema::defaultStringLength(191);
+
         // Record create/update/delete on all audited models.
         foreach (self::AUDITED as $model) {
             $model::observe(AuditObserver::class);
