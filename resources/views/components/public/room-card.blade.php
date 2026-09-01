@@ -18,17 +18,6 @@
         <div class="min-w-0">
             <h3 class="font-display text-3xl leading-tight sm:text-4xl">{{ $room->tr('name') }}</h3>
             <p class="mt-2.5 line-clamp-2 max-w-sm leading-relaxed text-white/70">{{ $room->tr('description') }}</p>
-
-            <div class="mt-6 flex divide-x divide-white/15">
-                <div class="pr-6">
-                    <p class="text-[10px] font-semibold uppercase tracking-[.14em] text-copper-400/80">{{ $en ? 'Single' : 'Individual' }}</p>
-                    <p class="mt-1 text-lg font-medium text-white">{{ number_format($room->price, 0, ',', ' ') }} Kz</p>
-                </div>
-                <div class="pl-6">
-                    <p class="text-[10px] font-semibold uppercase tracking-[.14em] text-copper-400/80">{{ $en ? 'Double' : 'Duplo' }}</p>
-                    <p class="mt-1 text-lg font-medium text-white">{{ number_format($room->price_double, 0, ',', ' ') }} Kz</p>
-                </div>
-            </div>
         </div>
 
         <span aria-hidden="true"

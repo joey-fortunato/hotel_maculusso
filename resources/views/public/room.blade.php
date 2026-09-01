@@ -53,9 +53,7 @@
                         <dl class="mt-6 grid gap-4 text-sm">
                             <div class="flex justify-between border-b border-sand-200 pb-4"><dt class="text-espresso-900/50">{{ __('Ocupação') }}</dt><dd class="font-semibold">{{ $room->guestsLabel() }}</dd></div>
                             <div class="flex justify-between border-b border-sand-200 pb-4"><dt class="text-espresso-900/50">{{ __('Área') }}</dt><dd class="font-semibold">{{ $room->size }}</dd></div>
-                            <div class="flex justify-between border-b border-sand-200 pb-4"><dt class="text-espresso-900/50">{{ __('Cama') }}</dt><dd class="font-semibold">{{ $room->tr('bed') }}</dd></div>
-                            <div class="flex justify-between border-b border-sand-200 pb-4"><dt class="text-espresso-900/50">{{ __('Individual') }}</dt><dd class="font-semibold">{{ number_format($room->price, 0, ',', ' ') }} Kz <span class="font-normal text-espresso-900/50">/ {{ __('noite') }}</span></dd></div>
-                            <div class="flex justify-between"><dt class="text-espresso-900/50">{{ __('Duplo') }}</dt><dd class="font-semibold">{{ number_format($room->price_double, 0, ',', ' ') }} Kz <span class="font-normal text-espresso-900/50">/ {{ __('noite') }}</span></dd></div>
+                            <div class="flex justify-between"><dt class="text-espresso-900/50">{{ __('Cama') }}</dt><dd class="font-semibold">{{ $room->tr('bed') }}</dd></div>
                         </dl>
                         <button type="button" @click="$store.booking.openModal('{{ $room->slug }}')" class="btn btn-gold mt-8 w-full">{{ __('Reservar este quarto') }}</button>
                         <a href="{{ setting('whatsapp') }}" class="mt-3 block text-center text-xs font-semibold uppercase tracking-[.16em] text-espresso-900/50 transition hover:text-copper-600">{{ __('Falar por WhatsApp') }}</a>

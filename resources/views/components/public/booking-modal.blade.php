@@ -85,14 +85,9 @@
                             <span class="min-w-0 flex-1">
                                 <span class="flex flex-wrap items-baseline justify-between gap-x-3">
                                     <span class="font-display text-lg leading-tight" x-text="room.name"></span>
-                                    <span class="text-right">
-                                        <span class="font-medium text-copper-600" x-text="$store.booking.money($store.booking.priceFor(room))"></span>
-                                        <span class="text-xs text-espresso-900/45"> / {{ __('noite') }}</span>
-                                    </span>
                                 </span>
                                 <span class="mt-0.5 flex flex-wrap items-baseline justify-between gap-x-3">
                                     <span class="text-xs uppercase tracking-[.12em] text-espresso-900/50" x-text="$store.booking.maxLabel(room.max_guests)"></span>
-                                    <span class="text-xs text-espresso-900/50"><span x-text="$store.booking.total($store.booking.priceFor(room))"></span> {{ __('total') }}</span>
                                 </span>
                                 <span class="mt-1.5 block text-sm leading-relaxed text-espresso-900/55" x-text="room.description"></span>
                             </span>
