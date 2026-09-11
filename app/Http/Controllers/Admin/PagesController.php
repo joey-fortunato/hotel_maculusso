@@ -22,6 +22,7 @@ final class PagesController extends Controller
                     'hero_eyebrow' => ['Sobre-título', 'text'],
                     'hero_title' => ['Título', 'textarea'],
                     'hero_title_accent' => ['Título — parte em destaque', 'text'],
+                    'hero_title_size' => ['Tamanho do título', 'select', ['sm' => 'Pequeno', 'md' => 'Médio (padrão)', 'lg' => 'Grande']],
                     'hero_subtitle' => ['Subtítulo', 'textarea'],
                     'hero_image' => ['Imagem de fundo', 'image'],
                 ],

@@ -29,10 +29,17 @@
                         <section class="cms-card">
                             <h2 class="cms-card-title mb-5">{{ $blockTitle }}</h2>
                             <div class="grid gap-5">
-                                @foreach($fields as $fkey => [$label, $type])
+                                @foreach($fields as $fkey => $field)
+                                    @php [$label, $type] = $field; $options = $field[2] ?? []; @endphp
                                     <div>
                                         <label class="{{ $lbl }}">{{ $label }}</label>
-                                        @if($type === 'image')
+                                        @if($type === 'select')
+                                            <select name="{{ $fkey }}" class="{{ $input }}">
+                                                @foreach($options as $val => $optLabel)
+                                                    <option value="{{ $val }}" @selected(\App\Models\Setting::raw($fkey, 'md') === $val)>{{ $optLabel }}</option>
+                                                @endforeach
+                                            </select>
+                                        @elseif($type === 'image')
                                             <div class="flex flex-wrap items-start gap-4">
                                                 @if(\App\Models\Setting::raw($fkey))<img src="{{ img_src(\App\Models\Setting::raw($fkey)) }}" alt="" class="h-20 w-28 shrink-0 border border-sand-200 object-cover">@endif
                                                 <div class="min-w-0 flex-1">
