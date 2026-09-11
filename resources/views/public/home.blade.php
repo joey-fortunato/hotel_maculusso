@@ -13,9 +13,9 @@
 
             <p class="eyebrow text-copper-400">{{ setting('hero_eyebrow') }}</p>
             <span class="rule-copper mx-auto mt-6"></span>
-            <h1 class="mx-auto mt-7 max-w-4xl font-display text-5xl leading-[1.05] sm:text-6xl lg:text-7xl">
+            <h1 class="mx-auto mt-7 max-w-4xl font-display text-4xl leading-[1.05] sm:text-5xl lg:text-6xl">
                 {{ setting('hero_title') }}<br class="hidden sm:block">
-                <span class="italic text-copper-400">{{ setting('hero_title_accent') }}</span>
+                <span class="text-white">{{ setting('hero_title_accent') }}</span>
             </h1>
             <p class="mx-auto mt-6 max-w-xl text-lg leading-8 text-sand-200/85">
                 {{ setting('hero_subtitle') }}
