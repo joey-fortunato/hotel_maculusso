@@ -21,8 +21,8 @@
                 };
             @endphp
             <h1 class="mx-auto mt-7 max-w-4xl font-display leading-[1.05] {{ $heroSize }}">
-                {{ setting('hero_title') }}<br class="hidden sm:block">
-                <span class="text-white">{{ setting('hero_title_accent') }}</span>
+                {{ setting('hero_title') }}@if(setting('hero_title_accent'))<br class="hidden sm:block">
+                <span class="text-white">{{ setting('hero_title_accent') }}</span>@endif
             </h1>
             <p class="mx-auto mt-6 max-w-xl text-lg leading-8 text-sand-200/85">
                 {{ setting('hero_subtitle') }}
